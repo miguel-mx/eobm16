@@ -77,6 +77,7 @@ vich_uploader:
     db_driver: orm
     mappings:
         eobm_historial:
-            uri_prefix:         /eobm2016-app/web/archivos
+            #uri_prefix:         /eobm2016-app/web/archivos
+            uri_prefix:         /eobm16/archivos
             upload_destination: %kernel.root_dir%/../web/archivos
             namer:              vich_uploader.namer_uniqid
