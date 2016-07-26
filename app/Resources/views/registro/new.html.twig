@@ -1,0 +1,216 @@
+{% extends 'layout.html.twig' %}
+
+{% block nav %}
+{% endblock %}
+
+{% block body %}
+    <div class="page-header"><h2>EOBM 2016 <small>Registro</small></h2></div>
+
+    {{ form_start(form) }}
+    <div class="alert-danger">{{ form_errors(form) }}</div>
+
+    <div class="panel panel-info">
+        <div class="panel-heading"><strong>Datos personales</strong></div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        {{ form_widget(form.nombre, {'attr': {'class': 'form-control'}}) }}
+                        <span class="text-danger">{{ form_errors(form.nombre) }}</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Apellido paterno</label>
+                        {{ form_widget(form.paterno, {'attr': {'class': 'form-control'}}) }}
+                        <span class="text-danger">{{ form_errors(form.paterno) }}</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Apellido materno</label>
+                        {{ form_widget(form.materno, {'attr': {'class': 'form-control'}}) }}
+                        <span class="text-danger">{{ form_errors(form.materno) }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Correo electrónico</label>
+                        {{ form_widget(form.mail, {'attr': {'class': 'form-control'}}) }}
+                        <span class="text-danger">{{ form_errors(form.mail) }}</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        {{ form_widget(form.tel, {'attr': {'class': 'form-control'}}) }}
+                        <span class="text-danger">{{ form_errors(form.tel) }}</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Sexo</label>
+                        {{ form_widget(form.sexo, {'attr': {'class': 'form-control'}}) }}
+                        <span class="text-danger">{{ form_errors(form.sexo) }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading"><strong>Datos académicos</strong></div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Universidad de procedencia</label>
+                        {{ form_widget(form.procedencia, {'attr': {'class': 'form-control'}}) }}
+                        <span class="text-danger">{{ form_errors(form.procedencia) }}</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Estudios</label>
+                        {{ form_widget(form.carrera, {'attr': {'class': 'form-control'}}) }}
+                        <span class="text-danger">{{ form_errors(form.carrera) }}</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Porcentaje de avance %</label>
+                        {{ form_widget(form.porcentaje, {'attr': {'class': 'form-control'}}) }}
+                        <span class="text-danger">{{ form_errors(form.porcentaje) }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Promedio general</label>
+                        {{ form_widget(form.promedio, {'attr': {'class': 'form-control'}}) }}
+                        <span class="text-danger">{{ form_errors(form.promedio) }}</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        {{ form_widget(form.historialFile) }}
+                        {#<p class="help-block">Subir archivo Kardex en formato PDF.</p>#}
+                        <span class="text-danger">{{ form_errors(form.historialFile) }}</span>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="alert alert-warning">
+                <strong>Se enviará un correo al profesor para solicitar una recomendación.</strong>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Profesor que lo recomienda</label>
+                        {{ form_widget(form.profesor, {'attr': {'class': 'form-control'}}) }}
+                        <span class="text-danger">{{ form_errors(form.porcentaje) }}</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Universidad de adscripción del profesor</label>
+                        {{ form_widget(form.univprofesor, {'attr': {'class': 'form-control'}}) }}
+                        <span class="text-danger">{{ form_errors(form.univprofesor) }}</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Correo electrónico del profesor</label>
+                        {{ form_widget(form.mailprofesor, {'attr': {'class': 'form-control'}}) }}
+                        <span class="text-danger">{{ form_errors(form.mailprofesor) }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading"><strong>Beca</strong></div>
+        <div class="panel-body">
+            <div class="well">Todos los estudiantes que sean aceptados y que no radiquen en Morelia, tendrán derecho a
+                hospedaje y alimentación; los asistentes que radiquen en Morelia se les proporcionará alimentación por
+                la duración de ambos eventos.
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Solicita beca</label>
+                        {{ form_widget(form.beca, {'attr': {'class': 'form-control'}}) }}
+                        <span class="text-danger">{{ form_errors(form.beca) }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label>Razones por las que quiere asistir</label>
+                        {{ form_widget(form.razones, {'attr': {'class': 'form-control', 'rows': '5'}}) }}
+                        <span class="text-danger">{{ form_errors(form.razones) }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-info">
+        <div class="panel-heading"><strong>Charla o poster</strong></div>
+        <div class="panel-body">
+            <div class="alert alert-warning">
+               <strong>Se dará prioridad a los solicitantes que participen con una charla o un poster.</strong>
+            </div>
+             <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Título de charla o poster</label>
+                        {{ form_widget(form.charla, {'attr': {'class': 'form-control'}}) }}
+                        <span class="text-danger">{{ form_errors(form.charla) }}</span>
+                    </div>
+                </div>
+             </div>
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label>Resumen</label>
+                        {{ form_widget(form.resumen, {'attr': {'class': 'form-control', 'rows': '5'}}) }}
+                        <span class="text-danger">{{ form_errors(form.resumen) }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-info">
+        <div class="panel-heading"><strong>Eventos anteriores</strong></div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label>¿En cuales eventos anteriores ha participado?</label>
+                        {{ form_widget(form.eventos, {'attr': {'class': 'form-control', 'rows': '5'}}) }}
+                        <span class="text-danger">{{ form_errors(form.eventos) }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ form_widget(form) }}
+    <h1></h1>
+    <input class="btn btn-primary" type="submit" value="Enviar solicitud" />
+
+    {{ form_end(form) }}
+    <h1></h1>
+
+    {#<ul>#}
+        {#<li>#}
+            {#<a href="{{ path('registro_index') }}">Back to the list</a>#}
+        {#</li>#}
+    {#</ul>#}
+{% endblock %}

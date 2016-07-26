@@ -1,0 +1,21 @@
+body {
+  padding-top: 50px;
+}
+
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+.container .jumbotron, .container-fluid .jumbotron {
+    background: #416fad none repeat scroll 0 0;
+    color: white;
+}
+
+.modal-dialog {
+     width: 1020px;
+}
+
+label {
+    font-weight: 300;
+}

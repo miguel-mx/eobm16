@@ -1,0 +1,125 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <div class="container">
+    <h1></h1>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="page-header text-muted"><h3><i class="fa fa-user"></i> Datos personales y académicos</h3></div>
+                    </div>
+                    <div class="col-md-10">
+                        <h2>{{ registro.paterno }} {{ registro.materno }} {{ registro.nombre }} <small>{{ registro.mail }}</small></h2>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tr>
+                                        <td><strong>Universidad de procedencia:</strong></td><td>{{ registro.procedencia }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Nivel de estudios:</strong></td><td>{{ registro.carrera }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Porcentaje de avance:</strong></td><td>{{ registro.porcentaje }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Promedio:</strong></td><td>{{ registro.promedio }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Historial</strong></td><td><a href="{{ vich_uploader_asset(registro, 'historialFile') }}"  target="_blank"/>{{ registro.historialName }}</a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tr>
+                                        <td><strong>Sexo:</strong></td><td>{{ registro.sexo | upper }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Teléfono:</strong></td><td>{{ registro.tel }}</td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                       <div class="page-header text-muted"><h3><i class="fa fa-graduation-cap"></i> Beca</h3></div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <strong>Beca: </strong>{{ registro.beca }}
+                                <div class="well">
+                                    {{ registro.razones }}
+                                </div>
+                                <p><strong>Eventos anteriores: </strong> {{ registro.eventos }}</p>
+                                <strong>Charla: </strong> {{ registro.charla }}
+                                <div class="well">
+                                    {{ registro.resumen}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="page-header text-muted"><h3><i class="fa fa-graduation-cap"></i> Recomendación</h3></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <table class="table">
+                                            <tr>
+                                                <td><strong>Profesor que lo recomienda:</strong></td><td>{{ registro.profesor }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Universidad:</strong></td><td>{{ registro.univprofesor }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Correo electrónico:</strong></td><td>{{ registro.mailprofesor }}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="well">{{ registro.recomendacion }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-muted text-right"><small>{{ registro.updatedAt|date('d-m-Y H:i:s') }}</small></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+    <div class="col-lg-12 col-lg-offset-4">
+
+        <a href="{{ path('registro_index') }}" class="btn btn-primary">
+            Solicitudes
+        </a>
+{#
+        <a href="{{ path('form_eval', { 'id': form.id }) }}" class="btn btn-primary">
+            Evaluar solicitud
+        </a>
+#}    </div>
+    </div>
+    <div class="page-header"><h1>&nbsp;</h1></div>
+
+{#    <a href="{{ path('registro_edit', { 'id': registro.id }) }}">Edit</a>#}
+
+{% endblock %}

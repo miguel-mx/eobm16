@@ -1,0 +1,20 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+
+        <div class="page-header"></div>
+        <div class="alert alert-dismissable alert-success">
+            <strong>
+                <i class="fa fa-check"></i>
+                {{ entity.nombre|title }} {{ entity.paterno|title }} {{ entity.materno|title }}</strong> hemos recibido tu registro.<br>
+            Te enviaremos un correo a la dirección que nos proporcionaste: <strong><i>{{ entity.mail }}</i></strong>
+            <br>
+
+            <p class="small">Si no recibes el correo de confirmación puedes verificar en tu bandeja de correos no deseados, si no lo has recibido puedes escribir a <strong>webmaster<i class="fa fa-at"></i>matmor.unam.mx</i></strong> para confirmar tu registro</p>
+        </div>
+
+        <div class="col-lg-7 col-lg-offset-5">
+            <a href="http://www.matmor.unam.mx/eobm2016" type="button"  class="btn btn-primary">Finalizar</a>
+        </div>
+
+{% endblock %}

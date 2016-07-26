@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="alert alert-dismissable alert-success">
+                <i class="fa fa-check"></i>
+                Hemos recibido su recomendación del alumno: <strong>{{ entity.nombre|title }} {{ entity.paterno|title }} {{ entity.materno|title }}</strong>
+            <br>
+            <br>
+        </div>
+        <div class="col-lg-7 col-lg-offset-5">
+            <a href="http://www.matmor.unam.mx/eobm16" type="button"  class="btn btn-primary">Finalizar</a>
+        </div>
+    </div>
+
+{% endblock %}

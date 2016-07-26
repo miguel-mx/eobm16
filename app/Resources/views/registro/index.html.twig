@@ -1,0 +1,48 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <h2>Solicitudes EOBM 2016</h2>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Mail</th>
+                    <th>Beca</th>
+                    <th>Fecha</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for registro in registros %}
+                    <tr>
+                        <td><a href="{{ path('registro_show', { 'slug': registro.slug }) }}">{{ registro.paterno }} {{ registro.materno }} {{ registro.nombre }}</a></td>
+                        <td>{{ registro.mail }}</td>
+                        <td>{{ registro.beca }}</td>
+                        <td>{{ registro.createdAt|date('d-m-Y') }}</td>
+{#                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('registro_show', { 'slug': registro.slug }) }}">show</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('registro_edit', { 'id': registro.id }) }}">edit</a>
+                                </li>
+                            </ul>
+                        </td>#}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{#
+
+    <ul>
+        <li>
+            <a href="{{ path('registro_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+#}
+{% endblock %}

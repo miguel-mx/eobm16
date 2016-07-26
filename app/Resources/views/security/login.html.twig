@@ -1,0 +1,44 @@
+{# app/Resources/views/security/login.html.twig #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Propedeuticto PCCM 2016 - Login</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ asset('bundles/app/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ asset('bundles/app/css/login.css') }}" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <form class="form-signin" action="{{ path('login') }}" method="post">
+        <h2 class="text-muted form-signin-heading">Inicio de sesion</h2>
+
+        <label for="username" class="sr-only">Usuario</label>
+        <input type="username" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="Usuario" required autofocus/>
+
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" class="form-control" placeholder="Password" name="_password" required>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+    </form>
+
+</div> <!-- /container -->
+</body>
+</html>
