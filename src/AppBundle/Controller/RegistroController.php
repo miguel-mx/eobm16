@@ -46,6 +46,8 @@ class RegistroController extends Controller
     {
         $registro = new Registro();
         $form = $this->createForm('AppBundle\Form\RegistroType', $registro);
+        $form->remove('recomendacion');
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -69,7 +71,7 @@ class RegistroController extends Controller
                 ->setSubject('Solicitud de recomendación. Escuela de Otoño y el Encuentro Nacional de Biología Matemática 2016')
                 ->setFrom('webmaster@matmor.unam.mx')
                 ->setTo(array($registro->getMailprofesor()))
-                ->setBcc(array('rudos@matmor.unam.mx'))
+                // ->setBcc(array('rudos@matmor.unam.mx'))
                 ->setBody($this->renderView('registro/mailprof.txt.twig', array('entity' => $registro)))
             ;
             $mailer->send($message);
@@ -78,7 +80,6 @@ class RegistroController extends Controller
             //return $this->redirectToRoute('registro_show', array('id' => $registro->getId()));
         }
 
-        $form->remove('recomendacion');
 
         return $this->render('registro/new.html.twig', array(
             'registro' => $registro,
