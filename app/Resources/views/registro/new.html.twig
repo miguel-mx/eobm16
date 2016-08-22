@@ -63,6 +63,9 @@
     <div class="panel panel-info">
         <div class="panel-heading"><strong>Datos académicos</strong></div>
         <div class="panel-body">
+            <div class="alert alert-warning">
+                <strong>Todos los campos son obligatorios para los estudiantes.</strong>
+            </div>
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
@@ -192,7 +195,7 @@
             <div class="row">
                 <div class="col-md-10">
                     <div class="form-group">
-                        <label>¿En cuales eventos anteriores ha participado?</label>
+                        <label>En caso de haber asistido a alguna escuela o taller extracurricular relacionados con la temática de ambos eventos en el pasado, indicar cuáles han sido.</label>
                         {{ form_widget(form.eventos, {'attr': {'class': 'form-control', 'rows': '5'}}) }}
                         <span class="text-danger">{{ form_errors(form.eventos) }}</span>
                     </div>

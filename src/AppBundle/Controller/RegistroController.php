@@ -71,7 +71,7 @@ class RegistroController extends Controller
                 ->setSubject('Solicitud de recomendación. Escuela de Otoño y el Encuentro Nacional de Biología Matemática 2016')
                 ->setFrom('webmaster@matmor.unam.mx')
                 ->setTo(array($registro->getMailprofesor()))
-                // ->setBcc(array('rudos@matmor.unam.mx'))
+                // >->setBcc(array('rudos@matmor.unam.mx'))
                 ->setBody($this->renderView('registro/mailprof.txt.twig', array('entity' => $registro)))
             ;
             $mailer->send($message);

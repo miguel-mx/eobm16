@@ -56,7 +56,7 @@ class RegistroType extends AbstractType
         ;
 
         $builder->add('historialFile', 'vich_file', array(
-            'label' => 'Archivo de Kardex',
+            'label' => 'Historial académico',
             'required'      => true,
         ));
 
