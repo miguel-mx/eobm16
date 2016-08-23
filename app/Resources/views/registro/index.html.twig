@@ -1,11 +1,18 @@
 {% extends 'layout.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
+
+
+{% endblock %}
+
 {% block body %}
     <h2>Solicitudes EOBM 2016</h2>
 
     <div class="row">
         <div class="col-md-12">
-            <table class="table">
+            <table class="table table-bordered" id="registro_table">
                 <thead>
                 <tr>
                     <th>Nombre</th>
@@ -37,6 +44,7 @@
             </table>
         </div>
     </div>
+
 {#
 
     <ul>
@@ -45,4 +53,14 @@
         </li>
     </ul>
 #}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+            $('#registro_table').DataTable();
+        } );
+    </script>
 {% endblock %}
