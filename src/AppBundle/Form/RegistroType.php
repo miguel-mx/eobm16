@@ -5,6 +5,9 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormInterface;
+
 
 class RegistroType extends AbstractType
 {
@@ -27,6 +30,14 @@ class RegistroType extends AbstractType
             ))
             ->add('mail')
             ->add('tel')
+            ->add('status', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
+                'choices'  => array(
+                    'Estudiante' => 'Estudiante',
+                    'Profesor/Posdoctorado' => 'Profesor/Posdoctorado',
+                ),
+                    'choices_as_values' => true,
+                    'mapped' => false,
+            ))
             ->add('procedencia')
             ->add('carrera', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
                 'choices'  => array(
@@ -35,14 +46,14 @@ class RegistroType extends AbstractType
                 ),
                 'choices_as_values' => true,
             ))
-            ->add('porcentaje')
-            ->add('promedio')
-            ->add('profesor')
-            ->add('univprofesor')
-            ->add('mailprofesor')
-            ->add('recomendacion', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array('required'    => false))
+            ->add('porcentaje', 'Symfony\Component\Form\Extension\Core\Type\TextType', array('required' => false))
+            ->add('promedio', 'Symfony\Component\Form\Extension\Core\Type\TextType', array('required' => false))
+            ->add('profesor', 'Symfony\Component\Form\Extension\Core\Type\TextType', array('required' => false))
+            ->add('univprofesor', 'Symfony\Component\Form\Extension\Core\Type\TextType', array('required' => false))
+            ->add('mailprofesor', 'Symfony\Component\Form\Extension\Core\Type\TextType', array('required' => false))
+            ->add('recomendacion', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array('required' => false))
 //            ->add('cartaName')
-            ->add('eventos', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array('required'    => false))
+            ->add('eventos', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array('required' => false))
             ->add('beca', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
                 'choices'  => array(
                     'Solo comida' => 'Solo comida',
@@ -57,18 +68,28 @@ class RegistroType extends AbstractType
 
         $builder->add('historialFile', 'vich_file', array(
             'label' => 'Historial académico',
-            'required'      => true,
+            'required'      => false,
         ));
 
     }
-    
+
+
     /**
      * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Registro'
+            'validation_groups' => function (FormInterface $form) {
+                $status = $form['status']->getData();
+
+                if ($status == 'Estudiante') {
+                    return array('estudiantes');
+                }
+
+                return array('Default');
+            },
+            'data_class' => 'AppBundle\Entity\Registro',
         ));
     }
 }

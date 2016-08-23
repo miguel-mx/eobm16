@@ -60,6 +60,8 @@
             </div>
         </div>
     </div>
+
+
     <div class="panel panel-info">
         <div class="panel-heading"><strong>Datos académicos</strong></div>
         <div class="panel-body">
@@ -76,11 +78,20 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
+                        <label>Tipo de registro:</label>
+                        {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+                        <span class="text-danger">{{ form_errors(form.status) }}</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
                         <label>Estudios</label>
                         {{ form_widget(form.carrera, {'attr': {'class': 'form-control'}}) }}
                         <span class="text-danger">{{ form_errors(form.carrera) }}</span>
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Porcentaje de avance %</label>
@@ -88,8 +99,6 @@
                         <span class="text-danger">{{ form_errors(form.porcentaje) }}</span>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Promedio general</label>
@@ -107,7 +116,7 @@
             </div>
             <hr>
             <div class="alert alert-warning">
-                <strong>Se enviará un correo al profesor para solicitar una recomendación.</strong>
+                <strong>Estudiantes: Se enviará un correo al profesor para solicitar una recomendación.</strong>
             </div>
             <div class="row">
                 <div class="col-md-4">
@@ -216,4 +225,29 @@
             {#<a href="{{ path('registro_index') }}">Back to the list</a>#}
         {#</li>#}
     {#</ul>#}
+
+    <script>
+        document.getElementById("registro_status").addEventListener("change", myFunction);
+
+        function myFunction() {
+            if(document.getElementById("registro_status").value == "Profesor/Posdoctorado") {
+                document.getElementById("registro_porcentaje").disabled=true;
+                document.getElementById("registro_promedio").disabled=true;
+                document.getElementById("registro_historialFile").disabled=true;
+                document.getElementById("registro_profesor").disabled=true;
+                document.getElementById("registro_univprofesor").disabled=true;
+                document.getElementById("registro_mailprofesor").disabled=true;
+            }
+            else {
+                document.getElementById("registro_porcentaje").disabled=false;
+                document.getElementById("registro_promedio").disabled=false;
+                document.getElementById("registro_historialFile").disabled=false;
+                document.getElementById("registro_profesor").disabled=false;
+                document.getElementById("registro_univprofesor").disabled=false;
+                document.getElementById("registro_mailprofesor").disabled=false;
+            }
+        }
+    </script>
+
 {% endblock %}
+

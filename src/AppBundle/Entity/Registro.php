@@ -13,6 +13,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *
  * @ORM\Table(name="registro")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\RegistroRepository")
+ * @ORM\HasLifecycleCallbacks
  * @Vich\Uploadable
  */
 class Registro
@@ -102,42 +103,43 @@ class Registro
     /**
      * @var string
      *
-     * @ORM\Column(name="porcentaje", type="string", length=50)
-     * @Assert\NotBlank()
+     * @ORM\Column(name="porcentaje", type="string", length=50, nullable=true)
+     * @Assert\NotBlank(groups={"estudiantes"})
      */
     private $porcentaje;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="promedio", type="string", length=50)
+     * @ORM\Column(name="promedio", type="string", length=50, nullable=true)
+     * @Assert\NotBlank(groups={"estudiantes"})
      */
     private $promedio;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="profesor", type="string", length=50)
-     * @Assert\NotBlank()
+     * @ORM\Column(name="profesor", type="string", length=50, nullable=true)
+     * @Assert\NotBlank(groups={"estudiantes"})
      */
     private $profesor;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="univprofesor", type="string", length=100)
-     * @Assert\NotBlank()
+     * @ORM\Column(name="univprofesor", type="string", length=100, nullable=true)
+     * @Assert\NotBlank(groups={"estudiantes"})
      */
     private $univprofesor;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="mailprofesor", type="string", length=50)
+     * @ORM\Column(name="mailprofesor", type="string", length=50, nullable=true)
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",
      *     checkMX = true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"estudiantes"})
      */
 
     private $mailprofesor;
@@ -146,7 +148,7 @@ class Registro
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
-     * @Vich\UploadableField(mapping="eobm_historial", fileNameProperty="historialName")
+     * @Vich\UploadableField(mapping="eobm_historial", fileNameProperty="historialName", nullable=true)
      *
      * @Assert\File(
      *     maxSize = "2M",
@@ -154,6 +156,7 @@ class Registro
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
      *     mimeTypesMessage = "Please upload a valid PDF"
      * )
+     * @Assert\NotBlank(groups={"estudiantes"})
      *
      * @var File
      */
@@ -267,6 +270,15 @@ class Registro
      * @var \DateTime
      */
     private $createdAt;
+
+     public function __construct() {
+
+        $this->setCreatedAt(new \DateTime());
+
+        if ($this->getUpdatedAt() == null) {
+            $this->setUpdatedAt(new \DateTime());
+        }
+    }
 
     /**
      * Get id
@@ -851,6 +863,15 @@ class Registro
     public function getRazones()
     {
         return $this->razones;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function updateModifiedDatetime() {
+
+        $this->setUpdatedAt(new \DateTime());
     }
 
 

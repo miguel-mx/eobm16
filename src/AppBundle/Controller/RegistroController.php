@@ -58,23 +58,38 @@ class RegistroController extends Controller
             // Obtiene correo y msg de la forma de contacto
             $mailer = $this->get('mailer');
 
-            $message = \Swift_Message::newInstance()
-                ->setSubject('Escuela de Otoño y el Encuentro Nacional de Biología Matemática 2016')
-                ->setFrom('webmaster@matmor.unam.mx')
-                ->setTo(array($registro->getMail()))
-                ->setBcc(array('rudos@matmor.unam.mx'))
-                ->setBody($this->renderView('registro/mail.txt.twig', array('entity' => $registro)))
-            ;
-            $mailer->send($message);
+            $formStatus = $form["status"]->getData();
 
-            $message = \Swift_Message::newInstance()
-                ->setSubject('Solicitud de recomendación. Escuela de Otoño y el Encuentro Nacional de Biología Matemática 2016')
-                ->setFrom('webmaster@matmor.unam.mx')
-                ->setTo(array($registro->getMailprofesor()))
-                // >->setBcc(array('rudos@matmor.unam.mx'))
-                ->setBody($this->renderView('registro/mailprof.txt.twig', array('entity' => $registro)))
-            ;
-            $mailer->send($message);
+            if($formStatus == 'Estudiante') {
+
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Escuela de Otoño y el Encuentro Nacional de Biología Matemática 2016')
+                    ->setFrom('webmaster@matmor.unam.mx')
+                    ->setTo(array($registro->getMail()))
+                    ->setBcc(array('rudos@matmor.unam.mx'))
+                    ->setBody($this->renderView('registro/mail.txt.twig', array('entity' => $registro)))
+                ;
+                $mailer->send($message);
+
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Solicitud de recomendación. Escuela de Otoño y el Encuentro Nacional de Biología Matemática 2016')
+                    ->setFrom('webmaster@matmor.unam.mx')
+                    ->setTo(array($registro->getMailprofesor()))
+                    // >->setBcc(array('rudos@matmor.unam.mx'))
+                    ->setBody($this->renderView('registro/mailprof.txt.twig', array('entity' => $registro)));
+                $mailer->send($message);
+            }
+            else {
+
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Escuela de Otoño y el Encuentro Nacional de Biología Matemática 2016')
+                    ->setFrom('webmaster@matmor.unam.mx')
+                    ->setTo(array($registro->getMail()))
+                    ->setBcc(array('rudos@matmor.unam.mx'))
+                    ->setBody($this->renderView('registro/solicitudProfesor.txt.twig', array('entity' => $registro)))
+                ;
+                $mailer->send($message);
+            }
 
             return $this->render(':registro:confirmacion-registro.html.twig', array('id' => $registro->getId(),'entity'=>$registro));
             //return $this->redirectToRoute('registro_show', array('id' => $registro->getId()));
