@@ -81,10 +81,14 @@ class RegistroType extends AbstractType
     {
         $resolver->setDefaults(array(
             'validation_groups' => function (FormInterface $form) {
-                $status = $form['status']->getData();
 
-                if ($status == 'Estudiante') {
-                    return array('estudiantes');
+                if($form->has('status')) {
+
+                    $status = $form['status']->getData();
+
+                    if ($status == 'Estudiante') {
+                        return array('estudiantes');
+                    }
                 }
 
                 return array('Default');

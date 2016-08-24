@@ -134,6 +134,9 @@ class RegistroController extends Controller
         $editForm->remove('charla');
         $editForm->remove('resumen');
 
+        // Form event Postsubmit trata de revisar el estatus para utilizar los grupos de validación
+        $editForm->remove('status');
+
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
