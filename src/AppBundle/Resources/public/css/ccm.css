@@ -19,3 +19,19 @@ body {
 label {
     font-weight: 300;
 }
+
+.icon-success {
+    color: #5cb85c;
+}
+.icon-info {
+    color: #5bc0de;
+}
+.icon-primary {
+    color: #337ab7;
+}
+.icon-warning {
+    color: #f0ad4e;
+}
+.icon-danger {
+    color: #c9302c;
+}

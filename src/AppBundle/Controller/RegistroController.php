@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Registro;
 use AppBundle\Form\RegistroType;
 
+
 /**
  * Registro controller.
  *
@@ -182,7 +183,7 @@ class RegistroController extends Controller
     /**
      * Displays a form to edit an existing Registro entity.
      *
-     * @Route("/{id}/edit", name="registro_edit")
+     * @Route("/{slug}/edit", name="registro_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Registro $registro)
@@ -190,22 +191,39 @@ class RegistroController extends Controller
         // Access control
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Acceso restringido');
 
-        $deleteForm = $this->createDeleteForm($registro);
-        $editForm = $this->createForm('AppBundle\Form\RegistroType', $registro);
-        $editForm->handleRequest($request);
+        //$deleteForm = $this->createDeleteForm($registro);
+        //$editForm = $this->createForm('AppBundle\Form\RegistroType', $registro);
+        //$editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        $evalForm = $this->createFormBuilder()
+            ->add('aceptado',  'Symfony\Component\Form\Extension\Core\Type\CheckboxType')
+            ->add('comentarios',  'Symfony\Component\Form\Extension\Core\Type\TextareaType')
+            ->add('eval', 'Symfony\Component\Form\Extension\Core\Type\ButtonType')
+            ->getForm();
+
+        $evalForm->handleRequest($request);
+
+        if ($evalForm->isSubmitted() && $evalForm->isValid()) {
+
+            $data = $evalForm->getData();
+            $registro->setAceptado($data['aceptado']);
+            $registro->setComentarios($data['comentarios']);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($registro);
             $em->flush();
 
-            return $this->redirectToRoute('registro_edit', array('id' => $registro->getId()));
+            $this->addFlash(
+                'notice',
+                'Los cambios han sido guardados'
+            );
+
+            return $this->redirectToRoute('registro_show', array('slug' => $registro->getSlug()));
         }
 
-        return $this->render('registro/edit.html.twig', array(
+        return $this->render('registro/eval.html.twig', array(
             'registro' => $registro,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'eval_form' => $evalForm->createView(),
         ));
     }
 

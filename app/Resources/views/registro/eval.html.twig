@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <h1>Evaluación de solicitud</h1>
+
+    {{ form_start(eval_form) }}
+        {{ form_widget(eval_form) }}
+        <input type="submit" value="Evaluar" />
+    {{ form_end(eval_form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('registro_index') }}">Regresar a la lista de solicitudes</a>
+        </li>
+    </ul>
+{% endblock %}
