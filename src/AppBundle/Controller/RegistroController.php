@@ -144,7 +144,7 @@ class RegistroController extends Controller
 
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted()) {
 
             $em = $this->getDoctrine()->getManager();
 
