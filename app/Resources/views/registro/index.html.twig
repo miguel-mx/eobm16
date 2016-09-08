@@ -18,7 +18,8 @@
                     <th>Nombre</th>
                     <th>Mail</th>
                     <th>Beca</th>
-                    <th>Fecha</th>
+                    <th>Rec</th>
+                    <th>Aceptado</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -27,7 +28,8 @@
                         <td><a href="{{ path('registro_show', { 'slug': registro.slug }) }}">{{ registro.paterno }} {{ registro.materno }} {{ registro.nombre }}</a></td>
                         <td>{{ registro.mail }}</td>
                         <td>{{ registro.beca }}</td>
-                        <td>{{ registro.createdAt|date('d-m-Y') }}</td>
+                        <td class="text-center">{{ registro.recomendacion ? '<i class="fa fa-check-square-o icon-success"></i>' : '<i class="fa fa-times-circle icon-danger"></i>' }}</td>
+                        <td class="text-center">{{ registro.aceptado ? '<i class="fa fa-check-square-o icon-success"></i>' : '<i class="fa fa-times-circle icon-danger"></i>' }}</td>
 {#                        <td>
                             <ul>
                                 <li>

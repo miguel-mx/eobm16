@@ -110,6 +110,10 @@ class RegistroController extends Controller
      */
     public function recomAction(Request $request, Registro $registro)
     {
+        if($registro->getRecomendacion()) {
+            return $this->render('registro/confirmRecom.html.twig', array('id' => $registro->getId(), 'entity' => $registro));
+        }
+
         $editForm = $this->createForm('AppBundle\Form\RegistroType', $registro);
 
         $editForm->remove('nombre');
@@ -145,6 +149,8 @@ class RegistroController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             $registro->setUpdatedAt(new \DateTime());
+
+            // email solicitante y profesor
 
             $em->persist($registro);
             $em->flush();
