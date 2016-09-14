@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Registro;
 use AppBundle\Form\RegistroType;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 
 /**
@@ -45,6 +46,12 @@ class RegistroController extends Controller
      */
     public function newAction(Request $request)
     {
+        $now = new \DateTime();
+        $deadline = new \DateTime('2016-09-14');
+
+        if($now >= $deadline)
+            return $this->render(':registro:closed.html.twig');
+
         $registro = new Registro();
         $form = $this->createForm('AppBundle\Form\RegistroType', $registro);
         $form->remove('recomendacion');

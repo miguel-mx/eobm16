@@ -16,6 +16,7 @@
             <table class="table table-bordered" id="registro_table">
                 <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Nombre</th>
                     <th>Mail</th>
                     <th>Beca</th>
@@ -26,6 +27,7 @@
                 <tbody>
                 {% for registro in registros %}
                     <tr>
+                        <th><a href="{{ path('registro_show', { 'slug': registro.slug }) }}">{{ registro.id }}</a></th>
                         <td><a href="{{ path('registro_show', { 'slug': registro.slug }) }}">{{ registro.paterno }} {{ registro.materno }} {{ registro.nombre }}</a></td>
                         <td>{{ registro.mail }}</td>
                         <td>{{ registro.beca }}</td>
