@@ -47,7 +47,7 @@ class RegistroController extends Controller
     public function newAction(Request $request)
     {
         $now = new \DateTime();
-        $deadline = new \DateTime('2016-09-14');
+        $deadline = new \DateTime('2016-09-15');
 
         if($now >= $deadline)
             return $this->render(':registro:closed.html.twig');
