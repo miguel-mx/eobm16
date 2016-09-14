@@ -202,9 +202,9 @@ class RegistroController extends Controller
         //$editForm->handleRequest($request);
 
         $evalForm = $this->createFormBuilder()
-            ->add('aceptado',  'Symfony\Component\Form\Extension\Core\Type\CheckboxType')
-            ->add('comentarios',  'Symfony\Component\Form\Extension\Core\Type\TextareaType')
-            ->add('eval', 'Symfony\Component\Form\Extension\Core\Type\ButtonType')
+            ->add('aceptado',  'Symfony\Component\Form\Extension\Core\Type\CheckboxType',  array('data' => $registro->isAceptado(),'required' => false ))
+            ->add('comentarios',  'Symfony\Component\Form\Extension\Core\Type\TextareaType',  array('data' => $registro->getComentarios(), 'required' => false))
+//            ->add('eval', 'Symfony\Component\Form\Extension\Core\Type\ButtonType')
             ->getForm();
 
         $evalForm->handleRequest($request);

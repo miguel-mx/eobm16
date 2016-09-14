@@ -67,10 +67,10 @@
                             <div class="panel-body">
                                 <table class="table" width="50%">
                                     <thead>
-                                        <tr>
-                                            <th>Aceptado: {{ registro.aceptado ? '<i class="fa fa-check-square-o icon-success"></i>' : '<i class="fa fa-times-circle icon-danger"></i>' }}</th>
-                                            <th>Confirmado: {{ registro.confirmado ? '<i class="fa fa-check-square-o icon-success"></i>' : '<i class="fa fa-times-circle icon-danger"></i>' }}</th>
-                                        </tr>
+                                    <tr>
+                                        <th>Aceptado: {{ registro.aceptado ? '<i class="fa fa-check-square-o icon-success"></i>' : '<i class="fa fa-times-circle icon-danger"></i>' }}</th>
+                                        <th>Confirmado: {{ registro.confirmado ? '<i class="fa fa-check-square-o icon-success"></i>' : '<i class="fa fa-times-circle icon-danger"></i>' }}</th>
+                                    </tr>
                                     </thead>
                                 </table>
                                 <p class="text-muted">{{ registro.comentarios }}</p>
@@ -80,7 +80,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                       <div class="page-header text-muted"><h3><i class="fa fa-graduation-cap"></i> Beca</h3></div>
+                        <div class="page-header text-muted"><h3><i class="fa fa-graduation-cap"></i> Beca</h3></div>
                     </div>
                     <div class="col-md-10">
                         <div class="panel panel-default">
@@ -130,22 +130,22 @@
                 <p class="text-muted text-right"><small>{{ registro.updatedAt|date('d-m-Y H:i:s') }}</small></p>
             </div>
         </div>
+
+
+        <div class="row">
+            <div class="col-lg-12 col-lg-offset-4">
+
+                <a href="{{ path('registro_index') }}" class="btn btn-primary">
+                    Solicitudes
+                </a>
+                {#
+                        <a href="{{ path('form_eval', { 'id': form.id }) }}" class="btn btn-primary">
+                            Evaluar solicitud
+                        </a>
+                #}    </div>
+        </div>
+        <div class="page-header"><h1>&nbsp;</h1></div>
+
+        {#    <a href="{{ path('registro_edit', { 'id': registro.id }) }}">Edit</a>#}
     </div>
-
-    <div class="row">
-    <div class="col-lg-12 col-lg-offset-4">
-
-        <a href="{{ path('registro_index') }}" class="btn btn-primary">
-            Solicitudes
-        </a>
-{#
-        <a href="{{ path('form_eval', { 'id': form.id }) }}" class="btn btn-primary">
-            Evaluar solicitud
-        </a>
-#}    </div>
-    </div>
-    <div class="page-header"><h1>&nbsp;</h1></div>
-
-{#    <a href="{{ path('registro_edit', { 'id': registro.id }) }}">Edit</a>#}
-
 {% endblock %}

@@ -1,16 +1,42 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-    <h1>Evaluación de solicitud</h1>
+<div class="container">
+
+    <div class="page-header"><h2>Evaluación de solicitud</h2></div>
 
     {{ form_start(eval_form) }}
+    <div class="panel panel-info">
+        <div class="panel-heading"><strong>{{ registro.paterno }} {{ registro.materno }} {{ registro.nombre }}</strong></div>
+        <div class="panel-body">
+            <strong>Razones</strong>
+            <div class="well">
+                {{ registro.razones }}
+            </div>
+            <strong>Recomendación:</strong>
+            <div class="well">
+                {{ registro.recomendacion }}
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        {{ form_widget(eval_form.aceptado) }}
+                        Aceptado
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Comentarios: </label>
+                {{ form_widget(eval_form.comentarios, {'attr': {'class': 'form-control', 'rows': '5'}}) }}
+                <span class="text-danger">{{ form_errors(eval_form.comentarios) }}</span>
+            </div>
         {{ form_widget(eval_form) }}
-        <input type="submit" value="Evaluar" />
+        </div>
+    </div>
+
+
+        <input  class="btn btn-primary" type="submit" value="Evaluar" /> <a  class="btn btn-default" role="button" href="{{ path('registro_index') }}">Solicitudes</a>
     {{ form_end(eval_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('registro_index') }}">Regresar a la lista de solicitudes</a>
-        </li>
-    </ul>
+</div>
 {% endblock %}
