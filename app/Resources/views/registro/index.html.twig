@@ -19,8 +19,10 @@
                     <th>Id</th>
                     <th>Nombre</th>
                     <th>Mail</th>
+                    <th>Nivel</th>
+                    <th>Plática</th>
                     <th>Beca</th>
-                    <th>Rec</th>
+                    <th>Recom</th>
                     <th>Aceptado</th>
                 </tr>
                 </thead>
@@ -30,9 +32,11 @@
                         <th><a href="{{ path('registro_show', { 'slug': registro.slug }) }}">{{ registro.id }}</a></th>
                         <td><a href="{{ path('registro_show', { 'slug': registro.slug }) }}">{{ registro.paterno }} {{ registro.materno }} {{ registro.nombre }}</a></td>
                         <td>{{ registro.mail }}</td>
+                        <td>{{ registro.carrera }}</td>
+                        <td>{{ registro.charla | truncate(30) }}</td>
                         <td>{{ registro.beca }}</td>
-                        <td class="text-center">{{ registro.recomendacion ? '<i class="fa fa-check-square-o icon-success"></i>' : '<i class="fa fa-times-circle icon-danger"></i>' }}</td>
-                        <td class="text-center">{{ registro.aceptado ? '<i class="fa fa-check-square-o icon-success"></i>' : '<i class="fa fa-times-circle icon-danger"></i>' }}</td>
+                        <td class="text-center">{{ registro.recomendacion ? '<i class="fa fa-check-square-o icon-success"></i> Si' : '<i class="fa fa-times-circle icon-danger"></i> No' }}</td>
+                        <td class="text-center">{{ registro.aceptado ? '<i class="fa fa-check-square-o icon-success"></i> Si' : '<i class="fa fa-times-circle icon-danger"></i> No' }}</td>
 {#                        <td>
                             <ul>
                                 <li>
