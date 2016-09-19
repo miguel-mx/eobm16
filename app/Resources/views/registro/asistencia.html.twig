@@ -1,0 +1,29 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+<div class="container">
+
+    <div class="page-header text-muted"><h2>Confirmación de asistencia</h2></div>
+
+    {{ form_start(confirm_form) }}
+    <div class="panel panel-info">
+        <div class="panel-heading"><h3><strong>{{ registro.paterno }} {{ registro.materno }} {{ registro.nombre }}</strong></h3></div>
+        <div class="panel-body">
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        {{ form_widget(confirm_form.confirmacion) }}
+                        Confirmo mi participación
+                    </label>
+                </div>
+            </div>
+        {{ form_widget(confirm_form) }}
+        </div>
+    </div>
+
+
+        <input  class="btn btn-success" type="submit" value="Confirmar" />
+    {{ form_end(confirm_form) }}
+
+</div>
+{% endblock %}

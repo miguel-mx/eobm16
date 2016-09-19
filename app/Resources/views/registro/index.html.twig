@@ -22,8 +22,8 @@
                     <th>Nivel</th>
                     <th>Plática</th>
                     <th>Beca</th>
-                    <th>Recom</th>
                     <th>Aceptado</th>
+                    <th>Confirmado</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,8 +35,8 @@
                         <td>{{ registro.carrera }}</td>
                         <td>{{ registro.charla | truncate(30) }}</td>
                         <td>{{ registro.beca }}</td>
-                        <td class="text-center">{{ registro.recomendacion ? '<i class="fa fa-check-square-o icon-success"></i> Si' : '<i class="fa fa-times-circle icon-danger"></i> No' }}</td>
                         <td class="text-center">{{ registro.aceptado ? '<i class="fa fa-check-square-o icon-success"></i> Si' : '<i class="fa fa-times-circle icon-danger"></i> No' }}</td>
+                        <td class="text-center">{{ registro.confirmado ? '<i class="fa fa-check-square-o icon-success"></i> Si' : '<i class="fa fa-times-circle icon-danger"></i> No' }}</td>
 {#                        <td>
                             <ul>
                                 <li>

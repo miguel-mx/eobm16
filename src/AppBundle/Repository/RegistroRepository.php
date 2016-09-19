@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class RegistroRepository extends EntityRepository
 {
+    public function findAllAccepted()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT r FROM AppBundle:Registro r Where r.aceptado = TRUE ORDER BY r.paterno ASC'
+            )
+            ->getResult();
+    }
+
 }

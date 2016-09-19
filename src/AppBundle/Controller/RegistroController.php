@@ -39,6 +39,26 @@ class RegistroController extends Controller
     }
 
     /**
+     * Lists all Registro entities.
+     *
+     * @Route("/aceptados", name="registro_aceptados")
+     * @Method("GET")
+     */
+    public function aceptadosAction()
+    {
+        // Access control
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Acceso restringido');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $registros = $em->getRepository('AppBundle:Registro')->findAllAccepted();
+
+        return $this->render('registro/index.html.twig', array(
+            'registros' => $registros,
+        ));
+    }
+
+    /**
      * Creates a new Registro entity.
      *
      * @Route("/new", name="registro_new")
@@ -240,6 +260,67 @@ class RegistroController extends Controller
         ));
     }
 
+    /**
+     * Confirmación
+     *
+     * @Route("/{slug}/confirmacion", name="registro_confirmacion")
+     * @Method({"GET", "POST"})
+     */
+    public function confirmAction(Request $request, Registro $registro)
+    {
+        $now = new \DateTime();
+        $deadline = new \DateTime('2016-09-19 13:00');
+
+        if($now >= $deadline)
+            return $this->render(':registro:closedConfirmacion.html.twig');
+
+        // Revisa si ya está confirmado
+        if($registro->isConfirmado())
+            return $this->render('registro/confirmAsistencia.html.twig', array(
+                'entity' => $registro,
+            ));
+
+        $confirmForm = $this->createFormBuilder()
+            ->add('confirmacion',  'Symfony\Component\Form\Extension\Core\Type\CheckboxType',  array('data' => $registro->isConfirmado(),'required' => false ))
+            ->getForm();
+
+        $confirmForm->handleRequest($request);
+
+        if ($confirmForm->isSubmitted() && $confirmForm->isValid()) {
+
+            $data = $confirmForm->getData();
+            $registro->setConfirmado($data['confirmacion']);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($registro);
+            $em->flush();
+
+            $mailer = $this->get('mailer');
+
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Confirmación - Escuela de Otoño y el Encuentro Nacional de Biología Matemática 2016')
+                ->setFrom('webmaster@matmor.unam.mx')
+                ->setTo(array($registro->getMail()))
+                ->setBcc(array('rudos@matmor.unam.mx'))
+                ->setBody($this->renderView('registro/confirmacion.txt.twig', array('entity' => $registro)))
+            ;
+            $mailer->send($message);
+
+            $this->addFlash(
+                'notice',
+                'Registro confirmado'
+            );
+
+            return $this->render('registro/confirmAsistencia.html.twig', array(
+                'entity' => $registro,
+            ));
+        }
+
+        return $this->render('registro/asistencia.html.twig', array(
+            'registro' => $registro,
+            'confirm_form' => $confirmForm->createView(),
+        ));
+    }
     /**
      * Deletes a Registro entity.
      *
