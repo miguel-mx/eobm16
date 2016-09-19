@@ -269,7 +269,7 @@ class RegistroController extends Controller
     public function confirmAction(Request $request, Registro $registro)
     {
         $now = new \DateTime();
-        $deadline = new \DateTime('2016-09-19 13:00');
+        $deadline = new \DateTime('2016-09-22 13:00');
 
         if($now >= $deadline)
             return $this->render(':registro:closedConfirmacion.html.twig');
