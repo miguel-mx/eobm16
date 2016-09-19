@@ -35,7 +35,7 @@ class MailConfirmacionCommand extends ContainerAwareCommand
         $query = $em->createQuery(
             'SELECT r
             FROM AppBundle:Registro r
-            WHERE r.aceptado IS TRUE '
+            WHERE r.aceptado = TRUE '
         );
 
         $registros = $query->getResult();
